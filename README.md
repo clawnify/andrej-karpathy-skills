@@ -1,32 +1,178 @@
-# andrej-karpathy-skills
+# Karpathy-Inspired Coding-Agent Guidelines
 
-Behavioral guidelines for AI coding agents — drop the contents of [`CLAUDE.md`](./CLAUDE.md) into your project's `CLAUDE.md`, `AGENTS.md`, or equivalent system prompt to reduce common LLM coding mistakes (over-engineering, scope creep, silent assumptions, "we'll fix it later" shortcuts).
+> Built and maintained by [Clawnify](https://clawnify.com) — a managed platform that provisions AI agents with WhatsApp / Telegram / Email and browser capabilities for non-technical users.
 
-## What's in it
+A single `CLAUDE.md` file to improve AI coding-agent behavior, derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls, plus one section we added for the AI-assisted-coding era.
 
-Five short sections:
+## The Problems
 
-1. **Think Before Coding** — surface assumptions and tradeoffs, don't pick silently
-2. **Simplicity First** — minimum code, no speculative abstractions
-3. **Surgical Changes** — touch only what the request requires
-4. **Goal-Driven Execution** — define verifiable success criteria, loop until met
-5. **Recalibrate Time Estimates** — "weeks of work" in pre-AI terms is often 1–2 hours now; don't downgrade quality to save time you don't actually need
+From Andrej's post:
 
-The bias is toward caution over speed. For trivial tasks, use judgment.
+> "The models make wrong assumptions on your behalf and just run along with them without checking. They don't manage their confusion, don't seek clarifications, don't surface inconsistencies, don't present tradeoffs, don't push back when they should."
 
-## Usage
+> "They really like to overcomplicate code and APIs, bloat abstractions, don't clean up dead code... implement a bloated construction over 1000 lines when 100 would do."
 
-Append to your project's instructions file:
+> "They still sometimes change/remove comments and code they don't sufficiently understand as side effects, even if orthogonal to the task."
+
+Plus one of our own: agents reach for shortcuts ("we don't have time", "we'll fix it later") on time budgets that were sized for unassisted humans, not for an AI session.
+
+## The Solution
+
+Five principles in one file that directly address these issues:
+
+| Principle | Addresses |
+|-----------|-----------|
+| **Think Before Coding** | Wrong assumptions, hidden confusion, missing tradeoffs |
+| **Simplicity First** | Overcomplication, bloated abstractions |
+| **Surgical Changes** | Orthogonal edits, touching code you shouldn't |
+| **Goal-Driven Execution** | Leverage through verifiable success criteria |
+| **Recalibrate Time Estimates** | Quality downgrades justified by stale time budgets |
+
+## The Five Principles in Detail
+
+### 1. Think Before Coding
+
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+LLMs often pick an interpretation silently and run with it. This principle forces explicit reasoning:
+
+- **State assumptions explicitly** — If uncertain, ask rather than guess
+- **Present multiple interpretations** — Don't pick silently when ambiguity exists
+- **Push back when warranted** — If a simpler approach exists, say so
+- **Stop when confused** — Name what's unclear and ask for clarification
+
+### 2. Simplicity First
+
+**Minimum code that solves the problem. Nothing speculative.**
+
+Combat the tendency toward overengineering:
+
+- No features beyond what was asked
+- No abstractions for single-use code
+- No "flexibility" or "configurability" that wasn't requested
+- No error handling for impossible scenarios
+- If 200 lines could be 50, rewrite it
+
+**The test:** Would a senior engineer say this is overcomplicated? If yes, simplify.
+
+### 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+
+- Don't "improve" adjacent code, comments, or formatting
+- Don't refactor things that aren't broken
+- Match existing style, even if you'd do it differently
+- If you notice unrelated dead code, mention it — don't delete it
+
+When your changes create orphans:
+
+- Remove imports/variables/functions that YOUR changes made unused
+- Don't remove pre-existing dead code unless asked
+
+**The test:** Every changed line should trace directly to the user's request.
+
+### 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform imperative tasks into verifiable goals:
+
+| Instead of... | Transform to... |
+|--------------|-----------------|
+| "Add validation" | "Write tests for invalid inputs, then make them pass" |
+| "Fix the bug" | "Write a test that reproduces it, then make it pass" |
+| "Refactor X" | "Ensure tests pass before and after" |
+
+For multi-step tasks, state a brief plan:
+
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let the LLM loop independently. Weak criteria ("make it work") require constant clarification.
+
+### 5. Recalibrate Time Estimates
+
+**"Weeks of work" in pre-AI terms is often 1–2 hours now. Don't cut corners on something you can actually finish this session.**
+
+Watch for these self-justifications:
+
+- "A proper version would take too long, so I'll [hack / stub / defer]"
+- "We don't have time to [validate / secure / migrate], so [skip]"
+- "For now let's just [shortcut]; we can do it right later"
+
+Those estimates are anchored to an unassisted-human baseline. What used to be a two-week project for a senior engineer frequently fits in a single session with an AI agent. The "no time" argument is usually wrong, and "later" rarely arrives.
+
+Within the scope the user actually asked for (see Simplicity First), pick the option that's best on:
+
+- **Scalability** — does this hold at 100× the load / data / users?
+- **Long term** — six months from now, is this a foundation or a wound?
+- **Security** — would you ship this if your name were on the incident report?
+
+Speed is rarely the right axis to optimize on. If the proper version genuinely would take days, say so explicitly and let the user decide — don't silently downgrade to the shortcut.
+
+## Install
+
+**Option A: New project**
 
 ```bash
+curl -o CLAUDE.md https://raw.githubusercontent.com/clawnify/andrej-karpathy-skills/main/CLAUDE.md
+```
+
+**Option B: Append to an existing `CLAUDE.md` / `AGENTS.md`**
+
+```bash
+echo "" >> CLAUDE.md
 curl https://raw.githubusercontent.com/clawnify/andrej-karpathy-skills/main/CLAUDE.md >> CLAUDE.md
 ```
 
-Or copy the sections you want.
+Works as-is with Claude Code, Cursor, Codex, and any other agent that reads `CLAUDE.md` / `AGENTS.md` / equivalent.
+
+## Key Insight
+
+From Andrej:
+
+> "LLMs are exceptionally good at looping until they meet specific goals... Don't tell it what to do, give it success criteria and watch it go."
+
+The "Goal-Driven Execution" principle captures this: transform imperative instructions into declarative goals with verification loops. The "Recalibrate Time Estimates" principle is its counterpart on the *what* — if you have to choose between a quick fix and the right design, the AI age usually means you can afford the right design within the same session.
+
+## How to Know It's Working
+
+These guidelines are working if you see:
+
+- **Fewer unnecessary changes in diffs** — only requested changes appear
+- **Fewer rewrites due to overcomplication** — code is simple the first time
+- **Fewer "we'll fix it later" shortcuts** — the right design fits in the session
+- **Clarifying questions come before implementation** — not after mistakes
+- **Clean, minimal PRs** — no drive-by refactoring or "improvements"
+
+## Customization
+
+These guidelines are designed to be merged with project-specific instructions. Add them to your existing `CLAUDE.md` or create a new one.
+
+For project-specific rules, add sections like:
+
+```markdown
+## Project-Specific Guidelines
+
+- Use TypeScript strict mode
+- All API endpoints must have tests
+- Follow the existing error handling patterns in `src/utils/errors.ts`
+```
+
+## Tradeoff Note
+
+These guidelines bias toward **caution over speed**. For trivial tasks (simple typo fixes, obvious one-liners), use judgment — not every change needs the full rigor.
+
+The goal is reducing costly mistakes on non-trivial work, not slowing down simple tasks.
 
 ## Credits
 
-Sections 1–4 adapted from [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills), inspired by Andrej Karpathy's writing on working with LLMs. Section 5 added.
+Sections 1–4 adapted from [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) by [@jiayuan_jy](https://x.com/jiayuan_jy), inspired by [Andrej Karpathy's writing on LLM coding pitfalls](https://x.com/karpathy/status/2015883857489522876). Section 5 added by Clawnify.
 
 ## License
 
