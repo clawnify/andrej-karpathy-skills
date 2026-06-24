@@ -1,19 +1,18 @@
 {
-  "name": "andrej-karpathy-skills",
+  "name": "@clawnify/greybeard",
   "version": "0.1.0",
-  "description": "Karpathy-inspired coding-agent guidelines + skillify / check-resolvable skills + the /scalable decision test, installable across every AI coding agent.",
+  "description": "Greybeard — Karpathy-inspired guardrails that make your AI coding agent behave like a principled senior engineer. Guidelines + skillify / check-resolvable skills + the /scalable decision test, installable across every AI coding agent.",
   "license": "MIT",
-  "homepage": "https://github.com/clawnify/andrej-karpathy-skills",
+  "homepage": "https://github.com/clawnify/greybeard",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clawnify/andrej-karpathy-skills.git"
+    "url": "git+https://github.com/clawnify/greybeard.git"
   },
   "bugs": {
-    "url": "https://github.com/clawnify/andrej-karpathy-skills/issues"
+    "url": "https://github.com/clawnify/greybeard/issues"
   },
   "bin": {
-    "andrej-karpathy-skills": "./bin/install.js",
-    "karpathy-skills": "./bin/install.js"
+    "greybeard": "./bin/install.js"
   },
   "engines": {
     "node": ">=18"
