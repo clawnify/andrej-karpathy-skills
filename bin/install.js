@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 'use strict';
 
-// andrej-karpathy-skills — cross-platform installer.
+// greybeard — cross-platform installer.
 //
 // Detects the AI coding agents on your machine / in this project and installs
 // the Karpathy-inspired guidelines (+ Claude Code skills and the /scalable
 // command) into each one's rule location. Pure Node stdlib, zero runtime deps.
 //
-//   npx andrej-karpathy-skills            # install for every detected agent
-//   npx andrej-karpathy-skills --all      # install for all agents, detected or not
-//   npx andrej-karpathy-skills --only claude --only cursor
-//   npx andrej-karpathy-skills --dry-run  # show what would change
-//   npx andrej-karpathy-skills --uninstall
+//   npx @clawnify/greybeard            # install for every detected agent
+//   npx @clawnify/greybeard --all      # install for all agents, detected or not
+//   npx @clawnify/greybeard --only claude --only cursor
+//   npx @clawnify/greybeard --dry-run  # show what would change
+//   npx @clawnify/greybeard --uninstall
 
 const fs = require('fs');
 const os = require('os');
@@ -190,10 +190,10 @@ function main() {
 }
 
 function printHelp() {
-  console.log(`andrej-karpathy-skills installer
+  console.log(`greybeard installer
 
 Usage:
-  npx andrej-karpathy-skills [flags]
+  npx @clawnify/greybeard [flags]
 
 Flags:
   --all          install for every supported agent, detected or not

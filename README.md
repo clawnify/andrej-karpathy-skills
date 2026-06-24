@@ -2,11 +2,19 @@
   <img src="assets/greybeard.png" width="320" alt="The Greybeard — Principal Engineer">
 </p>
 
-<h1 align="center">Karpathy-Inspired Coding-Agent Guidelines</h1>
+<h1 align="center">Greybeard</h1>
+
+<p align="center">
+  <sub>Karpathy-inspired guardrails that make your AI coding agent behave like a principled senior engineer.</sub>
+</p>
 
 <p align="center">
   <em>Make your agent code like the senior who's been paged at 3am for every shortcut you're about to take.</em><br>
   <strong>"Did you check, or did you guess?"</strong>
+</p>
+
+<p align="center">
+  <code>npx @clawnify/greybeard</code>
 </p>
 
 > Built and maintained by [Clawnify](https://clawnify.com) — a managed platform that provisions AI agents with WhatsApp / Telegram / Email and browser capabilities for non-technical users.
@@ -189,17 +197,17 @@ Then `/scalable` (tests the current direction) or `/scalable <a specific decisio
 **One command — every agent on your machine:**
 
 ```bash
-npx andrej-karpathy-skills
+npx @clawnify/greybeard
 ```
 
 It detects the AI coding agents you actually use and installs the right files for each: the seven guidelines into the rule file each one reads (`CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursor/rules/`, `.windsurf/rules/`, `.clinerules/`, `.github/copilot-instructions.md`), plus the `skillify` / `check-resolvable` skills and the `/scalable` command for Claude Code and OpenClaw. Shared files are edited between markers, so re-running is a safe no-op and your own content is preserved.
 
 ```bash
-npx andrej-karpathy-skills --list        # show detected agents
-npx andrej-karpathy-skills --all         # install for all agents, detected or not
-npx andrej-karpathy-skills --only cursor # just one (repeatable)
-npx andrej-karpathy-skills --dry-run     # preview without writing
-npx andrej-karpathy-skills --uninstall   # remove what it added
+npx @clawnify/greybeard --list        # show detected agents
+npx @clawnify/greybeard --all         # install for all agents, detected or not
+npx @clawnify/greybeard --only cursor # just one (repeatable)
+npx @clawnify/greybeard --dry-run     # preview without writing
+npx @clawnify/greybeard --uninstall   # remove what it added
 ```
 
 Supported: **Claude Code, Cursor, Windsurf, Cline, GitHub Copilot, Codex, Gemini CLI, OpenClaw** — and any agent that reads `CLAUDE.md` / `AGENTS.md`.
@@ -207,16 +215,16 @@ Supported: **Claude Code, Cursor, Windsurf, Cline, GitHub Copilot, Codex, Gemini
 **Claude Code plugin marketplace** (the skills + `/scalable`):
 
 ```
-/plugin marketplace add clawnify/andrej-karpathy-skills
-/plugin install andrej-karpathy-skills
+/plugin marketplace add clawnify/greybeard
+/plugin install greybeard
 ```
 
 **Manual** (just the guidelines, one file — no Node):
 
 ```bash
-curl -o CLAUDE.md https://raw.githubusercontent.com/clawnify/andrej-karpathy-skills/main/CLAUDE.md
+curl -o CLAUDE.md https://raw.githubusercontent.com/clawnify/greybeard/main/CLAUDE.md
 # …or append to an existing CLAUDE.md / AGENTS.md:
-curl https://raw.githubusercontent.com/clawnify/andrej-karpathy-skills/main/CLAUDE.md >> CLAUDE.md
+curl https://raw.githubusercontent.com/clawnify/greybeard/main/CLAUDE.md >> CLAUDE.md
 ```
 
 > The per-agent rule files are generated from `CLAUDE.md` (the single source) by `scripts/build-rules.js`. Contributors: edit `CLAUDE.md`, run `npm run build`, commit. CI (`npm run check-sync`) fails if a copy drifts.
