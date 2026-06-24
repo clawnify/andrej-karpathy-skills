@@ -7,7 +7,13 @@ Run the decision test on **$ARGUMENTS** — or, if that's empty, on the approach
 
 The governing question for the choice: **whatever is scalable, long term, and cannot be done in a more efficient way.**
 
-Judge it concretely — name specifics, not abstractions — on three axes:
+**Ground it first — don't judge from priors.** Your training data is stale; verify before ruling.
+
+- For this **infra/tech decision**, research how established services and competitors solved the same problem — engineering blogs, postmortems, talks, and case studies are fair game here. Prior art is signal.
+- Verify any **fact** you lean on — an API, a limit, a price, current behavior — against a primary source (official docs, the actual source code), not a remembered version or a random blog.
+- Read the actual code and architecture this touches before ruling — locally correct but architecturally wrong is still wrong.
+
+Then judge it concretely — name specifics, not abstractions — on three axes:
 
 - **Scalable** — does it hold at 100× the load / data / users / surface area? Name the first thing that breaks.
 - **Long term** — six months from now, is this a foundation or a wound? What does it cost to live with, or to undo?
