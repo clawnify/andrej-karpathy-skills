@@ -84,6 +84,8 @@ Within the scope the user actually asked for (see §2), the question to ask for 
 
 **If the three pillars aren't clear for the decision at hand, define them first.** Make each concrete for *this* case: name the dimension that actually grows (what "scalable" means here), the horizon that matters (a throwaway script vs the load-bearing path), and what efficiency is measured in (and what it'd be traded against). Pillars you can't name, you can't judge against. Security, correctness, and data-safety are non-negotiable guardrails on all three — never trade them away for speed.
 
+**The three pillars always stand. A project may add its own.** If the company or codebase has pillars tied to its own vision — say Portability, Privacy, Offline-first, or Open-source — fold them into the same check as extra pillars: they *extend* the three, never replace them. Find them where the project states them (its `CLAUDE.md` / `AGENTS.md`, vision or values docs — see §7), and judge every option against the combined set.
+
 Speed is rarely the right axis to optimize on. If the proper version genuinely would take days, say so explicitly and let the user decide — don't silently downgrade to the shortcut.
 
 When a shortcut genuinely is the right call, don't leave it silent: mark it inline with its ceiling and the upgrade trigger — `// shortcut: global lock; per-account locks if throughput matters`. A named ceiling can be found and revisited; an unmarked one silently rots into permanent debt.
