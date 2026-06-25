@@ -27,6 +27,8 @@ Then judge the approach against the **three pillars** — name specifics, not ab
 - **Long term** — six months from now, is this a foundation or a wound? What does it cost to live with, or to undo?
 - **Efficient** — is this already the leanest *correct* way, or is there a genuinely more efficient one (fewer moving parts, less code, less to maintain)? "More efficient" never means removing a safety guard.
 
+**Plus any pillars this project adds.** The three above always stand; if the company/codebase has its own vision pillars (e.g. Portability, Privacy, Offline-first), find them in its `CLAUDE.md` / `AGENTS.md` / vision docs and judge against those too — they extend the three, never replace them.
+
 Then:
 
 - **Be decisive.** Recommend ONE option. Don't survey alternatives you won't take.
