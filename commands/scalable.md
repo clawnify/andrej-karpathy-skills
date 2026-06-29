@@ -7,11 +7,13 @@ Run the decision test on **$ARGUMENTS** — or, if that's empty, on the approach
 
 The governing question for the choice: **whatever is scalable, long term, and cannot be done in a more efficient way.**
 
-**Ground it first — don't judge from priors.** Your training data is stale; verify before ruling.
+**Ground it first — don't judge from priors.** A prior isn't only stale training data — it's also a conclusion you minted *this* session from neighboring code. The second kind is more dangerous: it feels freshly earned, so it rides on the credibility of everything else you verified. Verify before ruling.
 
 - For this **infra/tech decision**, research how established services and competitors solved the same problem — engineering blogs, postmortems, talks, and case studies are fair game here. Prior art is signal.
 - Verify any **fact** you lean on — an API, a limit, a price, current behavior — against a primary source (official docs, the actual source code), not a remembered version or a random blog. When a docs-retrieval tool is available — Context7, a `find-docs` skill, an MCP docs server — use it to pull the latest docs instead of recalling them.
-- Read the actual code and architecture this touches before ruling — locally correct but architecturally wrong is still wrong.
+- Read the actual code and architecture this touches before ruling — locally correct but architecturally wrong is still wrong. That means the exact file the change runs through, not only its neighbors — reading everything *around* the target and inferring the target by analogy is the most seductive way to skip this.
+- **Ground per claim, not per session.** Verifying four neighboring things doesn't transfer to the one load-bearing claim. The volume of grounding you've done makes the unverified claim *feel* as solid as the rest — it isn't. Isolate the single claim the ruling rests on and verify *that* one directly: "the thing this touches is built like its neighbors" is not evidence about the thing it touches.
+- **Do the cheapest decisive check yourself — don't defer it.** If one file (a `wrangler.jsonc`, an entrypoint, a config) would settle the load-bearing claim, open it. Ending your turn by asking the human to confirm what a file you could have read answers is the same deferral repeating one turn later.
 - **Look down the stack, not just sideways.** Before designing any new state — config keys, DB columns, env vars, endpoints, files — search the framework / platform / library you build on (and the rest of this repo) for a native primitive that already models this concern. The leanest correct option is frequently one that already exists one layer down; reinventing what the host exposes is the most common efficiency miss. Verify it against the dependency's actual source, not its docs alone.
 
 **Define the three pillars for *this* decision — if they're not already clear.** Before judging, make each concrete for the case at hand:
